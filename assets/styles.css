@@ -921,6 +921,41 @@ textarea {
   background: rgba(255, 255, 255, 0.7);
 }
 
+.feedback-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.feedback-card {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  border: 1px solid rgba(216, 226, 234, 0.94);
+  border-radius: 8px;
+  padding: 22px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(24, 34, 45, 0.07);
+}
+
+.feedback-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.62;
+}
+
+.feedback-card .button {
+  justify-self: start;
+  margin-top: 4px;
+}
+
+.feedback-kicker {
+  color: var(--teal);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
 .governance-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr) minmax(0, 1.1fr);
@@ -1385,6 +1420,7 @@ dialog::backdrop {
   .raci-flow,
   .participant-grid,
   .participant-grid.two-up,
+  .feedback-grid,
   .guide-grid,
   .governance-grid,
   .raci-grid,
