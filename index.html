@@ -8,7 +8,8 @@
       name="description"
       content="Project management website for the CCCCO Agentic AI Demonstration Project."
     />
-    <link rel="stylesheet" href="assets/styles.css?v=20260520-board-fixes" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/styles.css?v=20260520-final-polish" />
   </head>
   <body>
     <header class="site-header" id="top">
@@ -67,7 +68,7 @@
             <strong>3</strong>
           </article>
           <article class="metric">
-            <span>Budget Views</span>
+            <span>MVP / Full Build Budget</span>
             <strong>$10K / $950K</strong>
           </article>
         </div>
@@ -208,6 +209,7 @@
               href="mailto:ggraves@fullcoll.edu?subject=Agentic%20AI%20Demo%20Project%20feedback&amp;body=Project%20area%3A%0AComment%3A%0AName%20%2F%20organization%3A"
               >Send comment</a
             >
+            <p class="feedback-note">Opens your email app and addresses the message to the project team inbox.</p>
           </article>
           <article class="feedback-card">
             <span class="feedback-kicker">Trackable item</span>
@@ -333,7 +335,22 @@
       </form>
     </dialog>
 
-    <script src="assets/nav.js?v=20260520-board-fixes"></script>
-    <script src="assets/app.js?v=20260520-board-fixes"></script>
+    <dialog id="confirmDialog" aria-labelledby="confirmTitle">
+      <div class="confirm-card">
+        <div class="confirm-mark" aria-hidden="true">!</div>
+        <div>
+          <p class="eyebrow">Confirm change</p>
+          <h2 id="confirmTitle">Delete this task?</h2>
+          <p id="confirmMessage">This task will be removed from the workboard.</p>
+        </div>
+        <div class="confirm-actions">
+          <button class="button text-button" id="cancelDeleteButton" type="button">Keep task</button>
+          <button class="danger-button" id="confirmDeleteButton" type="button">Delete task</button>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="assets/nav.js?v=20260520-final-polish"></script>
+    <script src="assets/app.js?v=20260520-final-polish"></script>
   </body>
 </html>

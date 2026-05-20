@@ -350,6 +350,7 @@ const state = {
   guideSearch: "",
   tasks: loadTasks(),
   editingTaskId: "",
+  pendingDeleteTaskId: "",
 };
 
 const els = {
@@ -375,6 +376,11 @@ const els = {
   taskOtherAssigneesInput: document.querySelector("#taskOtherAssigneesInput"),
   taskDetailsInput: document.querySelector("#taskDetailsInput"),
   assigneeOptions: document.querySelector("#assigneeOptions"),
+  confirmDialog: document.querySelector("#confirmDialog"),
+  confirmTitle: document.querySelector("#confirmTitle"),
+  confirmMessage: document.querySelector("#confirmMessage"),
+  cancelDeleteButton: document.querySelector("#cancelDeleteButton"),
+  confirmDeleteButton: document.querySelector("#confirmDeleteButton"),
   timeline: document.querySelector("#timeline"),
   outcomeList: document.querySelector("#outcomeList"),
   guideSearch: document.querySelector("#guideSearch"),
@@ -474,8 +480,14 @@ function bindEvents() {
 
   els.closeTaskDialogButton.addEventListener("click", closeTaskDialog);
   els.cancelTaskButton.addEventListener("click", closeTaskDialog);
-  els.deleteTaskButton.addEventListener("click", deleteCurrentTask);
+  els.deleteTaskButton.addEventListener("click", requestCurrentTaskDelete);
   els.taskForm.addEventListener("submit", saveTaskFromForm);
+  els.cancelDeleteButton.addEventListener("click", closeDeleteDialog);
+  els.confirmDeleteButton.addEventListener("click", confirmDeleteTask);
+  els.confirmDialog.addEventListener("close", () => {
+    if (els.confirmDialog.returnValue !== "delete") state.pendingDeleteTaskId = "";
+    els.confirmDialog.returnValue = "";
+  });
 
   els.guideSearch.addEventListener("input", () => {
     state.guideSearch = els.guideSearch.value.trim().toLowerCase();
@@ -634,7 +646,7 @@ function renderWorkboard() {
   });
 
   els.taskList.querySelectorAll("[data-delete-task]").forEach((button) => {
-    button.addEventListener("click", () => deleteTask(button.dataset.deleteTask));
+    button.addEventListener("click", () => requestTaskDelete(button.dataset.deleteTask));
   });
 }
 
@@ -847,19 +859,35 @@ function updateTaskStatus(taskId, status) {
   saveTasks();
 }
 
-function deleteCurrentTask() {
+function requestCurrentTaskDelete() {
   if (!state.editingTaskId) return;
-  deleteTask(state.editingTaskId);
-  closeTaskDialog();
+  requestTaskDelete(state.editingTaskId);
 }
 
-function deleteTask(taskId) {
+function requestTaskDelete(taskId) {
   const task = state.tasks.find((item) => item.id === taskId);
-  if (task && !window.confirm(`Delete "${task.title}" from the workboard?`)) return;
+  if (!task) return;
+  state.pendingDeleteTaskId = task.id;
+  els.confirmTitle.textContent = "Delete this task?";
+  els.confirmMessage.textContent = `"${task.title}" will be removed from the workboard. This only affects the task list saved in this browser.`;
+  els.confirmDialog.showModal();
+  els.confirmDeleteButton.focus();
+}
+
+function closeDeleteDialog() {
+  els.confirmDialog.close("cancel");
+}
+
+function confirmDeleteTask() {
+  const taskId = state.pendingDeleteTaskId;
+  if (!taskId) return;
+  if (state.editingTaskId === taskId && els.taskDialog.open) closeTaskDialog();
   state.tasks = state.tasks.filter((task) => task.id !== taskId);
+  state.pendingDeleteTaskId = "";
   saveTasks();
   hydrateTaskFormOptions();
   renderWorkboard();
+  els.confirmDialog.close("delete");
 }
 
 function loadTasks() {
