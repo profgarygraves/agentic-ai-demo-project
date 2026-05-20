@@ -302,12 +302,12 @@ const guardrails = [
 ];
 
 const roles = [
-  { label: "Internal PM", value: "Gary Graves / Hongling Yang" },
-  { label: "External Co-Leads", value: "Gary Graves and Hongling Yang" },
+  { label: "Internal PM", value: "Gary Graves / Hongling Yang, CCCCO AI Fellows" },
+  { label: "External Co-Leads", value: "Gary Graves, Fullerton College / Hongling Yang, San Diego CCD" },
   { label: "Technical Reviewer", value: "Donnell Layne" },
   { label: "College Liaison", value: "Jackie Hester" },
   { label: "Counselor Support", value: "Alicia Cardenas" },
-  { label: "CCCCO Lead", value: "Don Daves-Rougeaux" },
+  { label: "CCCCO Lead", value: "Don Daves-Rougeaux, Senior Advisor to the Chancellor" },
   { label: "Sponsors", value: "Student Services and WEDD" },
 ];
 

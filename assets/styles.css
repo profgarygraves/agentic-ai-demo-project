@@ -1448,6 +1448,12 @@ dialog::backdrop {
   line-height: 1.35;
 }
 
+.participant-card dd a {
+  color: var(--teal);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
 .role-definition {
   position: relative;
   overflow: hidden;
