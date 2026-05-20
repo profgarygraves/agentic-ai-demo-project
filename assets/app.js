@@ -56,6 +56,11 @@ const pilots = [
     systems: ["Student profile and goals", "Secure document upload", "SIS and CRM integrations", "SMS/web/chat"],
     next: "Define the MVP scope, first student workflows, secured upload model, and pilot readiness criteria.",
     outcomes: ["24/7 support", "Personalized guidance", "Milestone completion"],
+    mvp: {
+      label: "My GradQuest",
+      href: "https://www.mygradquest.com",
+      note: "Working MVP for Pilot 2 student-facing personal agent exploration.",
+    },
   },
   {
     id: "faculty",
@@ -529,6 +534,15 @@ function renderPilots() {
           <span>Next project move</span>
           <strong>${escapeHtml(pilot.next)}</strong>
         </div>
+        ${
+          pilot.mvp
+            ? `<div class="pilot-mvp-callout">
+                <span>Working MVP</span>
+                <strong><a href="${escapeAttr(pilot.mvp.href)}">${escapeHtml(pilot.mvp.label)}</a></strong>
+                <p>${escapeHtml(pilot.mvp.note)}</p>
+              </div>`
+            : ""
+        }
         <div>
           <span>Systems and data</span>
           <div class="compact-tags">

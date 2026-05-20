@@ -598,6 +598,25 @@ h4 {
   border-bottom: 0;
 }
 
+.pilot-feature-side .pilot-mvp-callout {
+  border: 1px solid rgba(20, 127, 120, 0.2);
+  border-radius: 8px;
+  padding: 14px;
+  background: rgba(20, 127, 120, 0.08);
+}
+
+.pilot-mvp-callout a {
+  color: var(--teal);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.pilot-mvp-callout p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
 .pilot-feature-side span,
 .budget-note {
   color: var(--muted);
