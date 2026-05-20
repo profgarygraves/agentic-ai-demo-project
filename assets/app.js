@@ -130,7 +130,7 @@ const defaultTasks = [
     title: "Build Element451 college cohort",
     due: "Pilot setup",
     status: "not-started",
-    assignees: ["Gary Graves", "Savanna McDada", "Jackie Hester"],
+    assignees: ["Gary Graves", "Savanna McDada", "Jacqueline Hester"],
     details:
       "Confirm participating colleges, data-sharing expectations, update cadence, and shared best-practice documentation.",
   },
@@ -305,8 +305,8 @@ const roles = [
   { label: "Internal PM", value: "Gary Graves / Hongling Yang, CCCCO AI Fellows" },
   { label: "External Co-Leads", value: "Gary Graves, Fullerton College / Hongling Yang, San Diego CCD" },
   { label: "Technical Reviewer", value: "Donnell Layne" },
-  { label: "College Liaison", value: "Jackie Hester" },
-  { label: "Counselor Support", value: "Alicia Cardenas" },
+  { label: "College Liaison", value: "Jacqueline Hester, San Diego Miramar College" },
+  { label: "Counselor Support", value: "Alicia Cardenas, West Valley College | BACCC" },
   { label: "CCCCO Lead", value: "Don Daves-Rougeaux, Senior Advisor to the Chancellor" },
   { label: "Sponsors", value: "Student Services and WEDD" },
 ];
@@ -765,7 +765,7 @@ function getKnownAssignees() {
     "Don Daves-Rougeaux",
     "Alicia Cardenas",
     "Donnell Layne",
-    "Jackie Hester",
+    "Jacqueline Hester",
     "Savanna McDada",
     "Student Services",
     "WEDD",
