@@ -5,18 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agentic AI Demo Project | RACI</title>
     <meta name="description" content="Expanded RACI and SOP guidance for the Agentic AI Demonstration Project." />
-    <link rel="stylesheet" href="assets/styles.css?v=20260519-assignee-picker" />
+    <link rel="stylesheet" href="assets/styles.css?v=20260520-nav" />
   </head>
   <body>
     <header class="site-header" id="top">
-      <a class="brand" href="index.html" aria-label="Agentic AI Demo Project home">
+      <a class="brand" href="index.html#top" aria-label="Agentic AI Demo Project home">
         <span class="brand-mark" aria-hidden="true">AI</span>
         <span>Agentic AI Demo Project</span>
       </a>
-      <nav aria-label="Primary navigation">
-        <a href="index.html#pilots">Pilots</a>
+      <button class="menu-toggle" type="button" aria-controls="primaryNav" aria-expanded="false">Menu</button>
+      <nav class="site-nav" id="primaryNav" aria-label="Primary navigation">
+        <a href="index.html#top">Home</a>
         <a href="index.html#workboard">Workboard</a>
+        <a href="index.html#pilots">Pilots</a>
+        <a href="index.html#roadmap">Roadmap</a>
         <a href="index.html#guide">Guide</a>
+        <a href="index.html#feedback">Feedback</a>
         <a href="raci.html">RACI</a>
         <a href="index.html#governance">Governance</a>
       </nav>
@@ -319,5 +323,6 @@
       </div>
       <a href="#top">Back to top</a>
     </footer>
+    <script src="assets/nav.js?v=20260520-nav"></script>
   </body>
 </html>
