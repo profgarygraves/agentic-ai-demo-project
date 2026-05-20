@@ -570,13 +570,14 @@ function renderWorkboard() {
   const complete = state.tasks.filter((task) => task.status === "complete").length;
   const inProgress = state.tasks.filter((task) => task.status === "in-progress").length;
   const total = state.tasks.length;
-  const progress = total ? Math.round((complete / total) * 100) : 0;
+  const progress = total ? Math.round(((complete + inProgress * 0.5) / total) * 100) : 0;
+  const notStarted = total - complete - inProgress;
 
   els.boardMetrics.innerHTML = [
-    ["Progress", `${progress}%`],
-    ["Complete", String(complete)],
+    ["Weighted progress", `${progress}%`],
+    ["Not started", String(notStarted)],
     ["In progress", String(inProgress)],
-    ["Open", String(total - complete)],
+    ["Complete", String(complete)],
   ]
     .map(([label, value]) => `<article class="mini-metric"><span>${label}</span><strong>${value}</strong></article>`)
     .join("");
@@ -590,8 +591,11 @@ function renderWorkboard() {
         <article class="task-item task-theme-${escapeAttr(task.track)}">
           <div>
             <span class="status-dot ${task.status}"></span>
-            <p class="task-track">${escapeHtml(trackLabel)} | ${escapeHtml(task.due)}</p>
+            <p class="task-track">${escapeHtml(trackLabel)}</p>
             <h3>${escapeHtml(task.title)}</h3>
+            <div class="task-meta">
+              <span>Due: ${escapeHtml(task.due)}</span>
+            </div>
             <p>${escapeHtml(task.details)}</p>
             ${renderAssignees(task.assignees)}
           </div>
@@ -668,20 +672,23 @@ function renderOutcomes() {
 
 function renderGuide() {
   const query = state.guideSearch;
-  const filtered = guideSections.filter((section) => {
-    if (!query) return true;
-    const haystack = [section.title, section.tags, ...section.items].join(" ").toLowerCase();
-    return haystack.includes(query);
-  });
+  const filtered = guideSections
+    .map((section) => {
+      if (!query) return section;
+      const titleMatches = section.title.toLowerCase().includes(query);
+      const itemMatches = section.items.filter((item) => item.toLowerCase().includes(query));
+      return { ...section, items: titleMatches ? section.items : itemMatches };
+    })
+    .filter((section) => section.items.length);
 
   els.guideGrid.innerHTML = filtered.length
     ? filtered
         .map(
           (section) => `
             <details class="guide-card" open>
-              <summary>${escapeHtml(section.title)}</summary>
+              <summary>${highlightMatch(section.title, query)}</summary>
               <ul>
-                ${section.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+                ${section.items.map((item) => `<li>${highlightMatch(item, query)}</li>`).join("")}
               </ul>
             </details>
           `
@@ -824,7 +831,7 @@ function saveTaskFromForm(event) {
   if (index >= 0) {
     state.tasks[index] = task;
   } else {
-    state.tasks.unshift(task);
+    state.tasks.push(task);
   }
 
   saveTasks();
@@ -903,6 +910,13 @@ function splitAssignees(value) {
     .split(",")
     .map((name) => cleanText(name))
     .filter(Boolean);
+}
+
+function highlightMatch(value, query) {
+  const safeValue = escapeHtml(value);
+  if (!query) return safeValue;
+  const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return safeValue.replace(new RegExp(`(${escapedQuery})`, "gi"), "<mark>$1</mark>");
 }
 
 function cleanText(value) {

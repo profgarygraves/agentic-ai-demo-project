@@ -739,6 +739,13 @@ textarea {
   font-size: 2rem;
 }
 
+mark {
+  border-radius: 4px;
+  padding: 0 3px;
+  color: var(--ink);
+  background: rgba(198, 139, 31, 0.24);
+}
+
 .task-list {
   display: grid;
   gap: 10px;
@@ -775,6 +782,25 @@ textarea {
 
 .task-item p {
   margin: 8px 0 0;
+}
+
+.task-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.task-meta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  border-radius: 999px;
+  padding: 4px 10px;
+  color: var(--ink);
+  background: rgba(198, 139, 31, 0.14);
+  font-size: 0.82rem;
+  font-weight: 900;
 }
 
 .task-controls {
